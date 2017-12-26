@@ -12,7 +12,7 @@
 ;; spiral-steps: Nat -> Nat
 (define (spiral-steps n)
   (local [(define k (find-closest-odd 1 n))]
-    (- k 1 (modulo (abs (- (sqr k) n)) k)))) ;; Fix this for case where n > middle element
+    (- k 1 (modulo (abs (- (sqr k) n)) k))))
 
 ;; (find-closest-odd n) produces the first odd number whose
 ;;   square is >= n
