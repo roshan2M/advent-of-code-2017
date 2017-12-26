@@ -1,0 +1,29 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |Day 2 - Corruption Checksum|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;; ***************************
+;; Advent of Code 2017
+;; Day 2 - Corruption Checksum
+;; Roshan Munjal
+;; ***************************
+
+;; (checksum lolon) consumes a lolon (listof (listof Num))
+;;   and computes the highest difference in each row and
+;;   returns the sum over all rows
+;; checksum: (listof (listof Num)) -> Num
+(define (checksum lolon)
+  (cond [(empty? lolon) 0]
+        [else (+ (highest-diff (first lolon) (first (first lolon))
+                               (first (first lolon)))
+                 (checksum (rest lolon)))]))
+
+;; (highest-diff row low high) produces the highest difference
+;;   in row given the current low and high
+;; highest-diff: (listof Num) Num Num -> 
+(define (highest-diff row low high)
+  (cond [(empty? row) (- high low)]
+        [(< (first row) low)
+         (highest-diff (rest row) (first row) high)]
+        [(> (first row) high)
+         (highest-diff (rest row) low (first row))]
+        [else (highest-diff (rest row) low high)]))
