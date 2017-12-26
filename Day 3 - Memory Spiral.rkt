@@ -7,12 +7,14 @@
 ;; Roshan Munjal
 ;; *********************
 
+;; PART I
+
 ;; (spiral-steps n) counts the number of steps required to
 ;;   move from n to 1 in a spiral memory system
 ;; spiral-steps: Nat -> Nat
 (define (spiral-steps n)
   (local [(define k (find-closest-odd 1 n))]
-    (- k 1 (modulo (abs (- (sqr k) n)) k))))
+    (- k 1 (modulo (abs (- (sqr k) n)) k)))) ; Fix case where n <= middle element
 
 ;; (find-closest-odd n) produces the first odd number whose
 ;;   square is >= n
